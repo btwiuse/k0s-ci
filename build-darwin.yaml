@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: build-darwin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: build-darwin
+  template:
+    metadata:
+      labels:
+        app: build-darwin
+    spec:
+      containers:
+      - image: karalabe/xgo-latest
+        name: build-darwin
+        env:
+        - name: TOKEN
+          value: 6e3901122889358fcbf9b66b1ae460f8d0e56ea8ef075dc7e4
+        command:
+        - /bin/sh
+        - -c
+        args: 
+        - |
+          apt update; apt install -y tmux figlet curl
+
+          curl -sL https://get.k0s.io/install.sh | bash
+          tmux new-session -d ~/.k0s/bin/k0s agent -name build_darwin -tags build-darwin -cmd 'tmux new-session bash -c "figlet build-darwin; bash"'
+
+          curl -sL https://raw.githubusercontent.com/buildkite/agent/master/install.sh | bash
+          ~/.buildkite-agent/bin/buildkite-agent start --tags darwin
+
+        resources: {}
+        securityContext:
+          runAsUser: 0
+        imagePullPolicy: Always
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
