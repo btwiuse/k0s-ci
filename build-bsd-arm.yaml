@@ -13,7 +13,7 @@ spec:
         app: build-bsd-arm
     spec:
       containers:
-      - image: karalabe/xgo-latest
+      - image: techknowlogick/xgo:latest
         name: build-bsd-arm
         env:
         - name: TOKEN

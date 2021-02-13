@@ -13,7 +13,7 @@ spec:
         app: build-bsd
     spec:
       containers:
-      - image: karalabe/xgo-latest
+      - image: techknowlogick/xgo:latest
         name: build-bsd
         env:
         - name: TOKEN

@@ -13,7 +13,7 @@ spec:
         app: build-windows
     spec:
       containers:
-      - image: karalabe/xgo-latest
+      - image: techknowlogick/xgo:latest
         name: build-windows
         env:
         - name: TOKEN

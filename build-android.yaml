@@ -24,7 +24,7 @@ spec:
         args: 
         - |
           apt update; apt install -y tmux figlet
-          export PATH="${PATH}:/opt/android/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+          export PATH="${PATH}:/opt/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/"
 
           curl -sL https://get.k0s.io/install.sh | bash
           tmux new-session -d ~/.k0s/bin/k0s agent -name build_android -tags build-android -cmd 'tmux new-session bash -c "figlet build-android; bash"'

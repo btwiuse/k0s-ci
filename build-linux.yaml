@@ -13,7 +13,7 @@ spec:
         app: build-linux
     spec:
       containers:
-      - image: karalabe/xgo-latest
+      - image: techknowlogick/xgo:latest
         name: build-linux
         env:
         - name: TOKEN
