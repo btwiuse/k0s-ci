@@ -13,7 +13,7 @@ spec:
         app: build-android
     spec:
       containers:
-      - image: techknowlogick/xgo:latest
+      - image: btwiuse/bazel
         name: build-android
         env:
         - name: TOKEN
@@ -25,13 +25,13 @@ spec:
         - -c
         args: 
         - |
-          apt update; apt install -y tmux figlet
+          apk add tmux figlet curl
 
           curl -sL https://get.k0s.io/install.sh | bash
           tmux new-session -d ~/.k0s/bin/k0s agent -name build_android -tags build-android -cmd 'tmux new-session bash -c "figlet build-android; bash"'
 
           curl -sL https://raw.githubusercontent.com/buildkite/agent/master/install.sh | bash
-          ~/.buildkite-agent/bin/buildkite-agent start --tags android
+          ~/.buildkite-agent/bin/buildkite-agent start --tags linux,android
 
         resources: {}
         securityContext:
