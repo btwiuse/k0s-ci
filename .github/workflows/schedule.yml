@@ -24,7 +24,7 @@ jobs:
     #   repository: btwiuse/k0s
     #   path: btwiuse/k0s
 
-    - run: kubectl apply -f build-windows.yml
+    - run: kubectl apply -f build-windows.yaml
       name: apply build-windows.yaml
 
     - run: |
