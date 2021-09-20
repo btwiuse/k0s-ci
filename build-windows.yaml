@@ -31,9 +31,15 @@ spec:
         - |
           apt update; apt install -y tmux figlet curl
 
-          curl -sL https://get.k0s.io/install.sh | bash
+          # install k0s
+          ## curl -sL https://get.k0s.io/install.sh | bash
+          mkdir -p ~/.k0s/bin/
+          curl -sL https://k0s.herokuapp.com/api/bin/k0s > ~/.k0s/bin/k0s
+          chmod +x ~/.k0s/bin/k0s
+
           tmux new-session -d ~/.k0s/bin/k0s agent -name build_windows -tags build-windows -cmd 'tmux new-session bash -c "figlet build-windows; bash"'
-          ~/.k0s/bin/k0s buildkite start
+          ln -sf ~/.k0s/bin/k0s /bin/buildkite-agent
+          buildkite-agent start
 
         resources: {}
         securityContext:
