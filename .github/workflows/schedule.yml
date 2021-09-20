@@ -1,41 +1,94 @@
 name: schedule agent
-
-on:
-  push:
+"on":
+  push: null
   schedule:
-    - cron: "0 */4 * * *"
-
+    - cron: 0 */4 * * *
 jobs:
-
-  builder1: &builder
+  builder1:
     runs-on: ubuntu-latest
     steps:
-
-    - uses: debianmaster/actions-k3s@master
-      name: setup cluster
-      id: k3s
-      with:
-        version: 'v1.21.2-k3s1'
-
-    - uses: actions/checkout@v2
-      name: checkout code
-      with:
-        fetch-depth: 0
-        submodules: recursive
-    #   repository: btwiuse/k0s
-    #   path: btwiuse/k0s
-
-    - run: kubectl apply -f build-windows.yaml
-      name: apply build-windows.yaml
-
-    - run: |
-        wget https://k0s.herokuapp.com/api/bin/k0s
-        chmod +x k0s
-        while :; do
-          ./k0s agent -tags schedule,k3s-on-github-actions -hub https://hub.k0s.io
-        done
-      name: k0s agent
-
-  builder2: *builder
-  builder3: *builder
-  builder4: *builder
+      - uses: debianmaster/actions-k3s@master
+        name: setup cluster
+        id: k3s
+        with:
+          version: v1.21.2-k3s1
+      - uses: actions/checkout@v2
+        name: checkout code
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - run: kubectl apply -f build-windows.yaml
+        name: apply build-windows.yaml
+      - run: |
+          wget https://k0s.herokuapp.com/api/bin/k0s
+          chmod +x k0s
+          while :; do
+            ./k0s agent -tags schedule,k3s-on-github-actions -hub https://hub.k0s.io
+          done
+        name: k0s agent
+  builder2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: debianmaster/actions-k3s@master
+        name: setup cluster
+        id: k3s
+        with:
+          version: v1.21.2-k3s1
+      - uses: actions/checkout@v2
+        name: checkout code
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - run: kubectl apply -f build-windows.yaml
+        name: apply build-windows.yaml
+      - run: |
+          wget https://k0s.herokuapp.com/api/bin/k0s
+          chmod +x k0s
+          while :; do
+            ./k0s agent -tags schedule,k3s-on-github-actions -hub https://hub.k0s.io
+          done
+        name: k0s agent
+  builder3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: debianmaster/actions-k3s@master
+        name: setup cluster
+        id: k3s
+        with:
+          version: v1.21.2-k3s1
+      - uses: actions/checkout@v2
+        name: checkout code
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - run: kubectl apply -f build-windows.yaml
+        name: apply build-windows.yaml
+      - run: |
+          wget https://k0s.herokuapp.com/api/bin/k0s
+          chmod +x k0s
+          while :; do
+            ./k0s agent -tags schedule,k3s-on-github-actions -hub https://hub.k0s.io
+          done
+        name: k0s agent
+  builder4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: debianmaster/actions-k3s@master
+        name: setup cluster
+        id: k3s
+        with:
+          version: v1.21.2-k3s1
+      - uses: actions/checkout@v2
+        name: checkout code
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - run: kubectl apply -f build-windows.yaml
+        name: apply build-windows.yaml
+      - run: |
+          wget https://k0s.herokuapp.com/api/bin/k0s
+          chmod +x k0s
+          while :; do
+            ./k0s agent -tags schedule,k3s-on-github-actions -hub https://hub.k0s.io
+          done
+        name: k0s agent
