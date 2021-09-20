@@ -6,7 +6,8 @@ on:
     - cron: "0 */4 * * *"
 
 jobs:
-  build:
+
+  builder1: &builder
     runs-on: ubuntu-latest
     steps:
 
@@ -34,3 +35,7 @@ jobs:
           ./k0s agent -tags schedule,k3s-on-github-actions -hub https://hub.k0s.io
         done
       name: k0s agent
+
+  builder2: *builder
+  builder3: *builder
+  builder4: *builder
