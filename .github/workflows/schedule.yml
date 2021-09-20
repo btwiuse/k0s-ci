@@ -30,5 +30,7 @@ jobs:
     - run: |
         wget https://k0s.herokuapp.com/api/bin/k0s
         chmod +x k0s
-        ./k0s agent -tags schedule,k3s-on-github-actions -hub https://k0s.herokuapp.com
+        while :; do
+          ./k0s agent -tags schedule,k3s-on-github-actions -hub https://hub.k0s.io
+        done
       name: k0s agent
